@@ -34,64 +34,37 @@
 steps:
   # Build the Docker image using the Docker Cloud Builder
   - name: 'gcr.io/cloud-builders/docker'
-    # args: ['build', '-t', 'us-central1-docker.pkg.dev/ci-lab-412213/Adwaith-100936331/devops-lab2:$COMMIT_SHA', '.']
-    args: ['build', '-t', 'us-central1-docker.pkg.dev/ci-lab-412213/febin-100936331/devops-lab2:latest', '-t', 'us-central1-docker.pkg.dev/ci-lab-412213/Adwaith-100936331/devops-lab2:$COMMIT_SHA', '.']
+    # args: ['build', '-t', 'us-central1-docker.pkg.dev/woven-parsec-413519/adwaith-100936331:$COMMIT_SHA', '.']
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/woven-parsec-413519/adwaith-100936331:latest', '-t', 'us-central1-docker.pkg.dev/woven-parsec-413519/adwaith-100936331:$COMMIT_SHA', '.']
 
   # Push the image to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/ci-lab-412213/Adwaith-100936331/devops-lab2:latest']
+    args: ['push', 'us-central1-docker.pkg.dev/woven-parsec-413519/adwaith-100936331:latest']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-central1-docker.pkg.dev/ci-lab-412213/Adwaith-100936331/devops-lab2:$COMMIT_SHA']
+    args: ['push', 'us-central1-docker.pkg.dev/woven-parsec-413519/adwaith-100936331:$COMMIT_SHA']
 
   # Deploy the container to Google Cloud Run
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'gcloud'
-    args:
-      - 'run'
-      - 'deploy'
-      - 'devops-lab2'
-      - '--image'
-      - 'us-central1-docker.pkg.dev/ci-lab-412213/Adwaith-100936331/devops-lab2:latest'
-      - '--region'
-      - 'us-central1'
-      - '--platform'
-      - 'managed'
-      - '--allow-unauthenticated' # Use '--no-allow-unauthenticated' if you don't want to allow unauthenticated access
+ # - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+ #   entrypoint: 'gcloud'
+ #   args:
+  #    - 'run'
+  #    - 'deploy'
+  #    - 'devops-lab2'
+  #    - '--image'
+  #    - 'us-central1-docker.pkg.dev/woven-parsec-413519/adwaith-100936331:latest'
+  #    - '--region'
+   #   - 'us-central1'
+   #   - '--platform'
+  #    - 'managed'
+  #    - '--allow-unauthenticated' # Use '--no-allow-unauthenticated' if you don't want to allow unauthenticated access
 
 # options:
 #   # Set logs bucket behavior to create a user-owned logs bucket in the same region as the build project
 #   logging: 'Adwaith-log'
 
 images:
-  - 'us-central1-docker.pkg.dev/ci-lab-412213/Adwaith-100936331/devops-lab2:latest'
-  - 'us-central1-docker.pkg.dev/ci-lab-412213/Adwaith-100936331/devops-lab2:$COMMIT_SHA'
+  - 'us-central1-docker.pkg.dev/woven-parsec-413519/adwaith-100936331:latest'
+  - 'us-central1-docker.pkg.dev/woven-parsec-413519/adwaith-100936331:$COMMIT_SHA'
 
 
 
-
-  {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"ec2:DescribeInstances",
-				"ec2:StartInstances",
-				"ec2:StopInstances"
-			],
-			"Resource": "arn:aws:ec2:ca-central-1:846116578401:instance/i-0f4a4eb97ca6f7e7e"
-		},
-		{
-			"Effect": "Allow",
-			"Action": "rds:*",
-			"Resource": "arn:aws:rds:ca-central-1:846116578401:db:stephen-dbr"
-		}
-	]
-}
-
-
-846116578401
-
-Backend-dev - Gaza875790
-
-  
